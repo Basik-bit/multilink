@@ -1,0 +1,550 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Remetall Auto — соцсети</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', 'Segoe UI', Roboto, system-ui, sans-serif;
+      background: #0a0a0a;
+      color: #ffffff;
+      min-height: 100vh;
+      padding: 24px;
+      line-height: 1.4;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    /* ===== ЛОГОТИП (общий класс для картинки) ===== */
+    .logo-svg {
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+    }
+
+    /* ===== ШАПКА ===== */
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 16px 0 32px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      margin-bottom: 60px;
+      flex-wrap: wrap;
+      gap: 20px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .brand-logo {
+      width: 56px;
+      height: 56px;
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .brand-text {
+      display: flex;
+      flex-direction: column;
+      line-height: 1.1;
+    }
+
+    .brand-name {
+      font-size: 1.25rem;
+      font-weight: 800;
+      letter-spacing: -0.5px;
+    }
+
+    .brand-name .red {
+      color: #c8102e;
+    }
+
+    .brand-tagline {
+      font-size: 0.6rem;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: rgba(255, 255, 255, 0.55);
+      font-weight: 600;
+      margin-top: 2px;
+    }
+
+    .header-right {
+      display: flex;
+      align-items: center;
+      gap: 24px;
+    }
+
+    .phone {
+      font-size: 1rem;
+      font-weight: 700;
+      color: #fff;
+      text-decoration: none;
+      letter-spacing: -0.3px;
+      transition: color 0.2s;
+    }
+
+    .phone:hover {
+      color: #c8102e;
+    }
+
+    .btn-call {
+      background: #c8102e;
+      color: #fff;
+      border: none;
+      padding: 14px 26px;
+      border-radius: 50px;
+      font-size: 0.95rem;
+      font-weight: 700;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      transition: all 0.25s ease;
+      cursor: pointer;
+      font-family: inherit;
+    }
+
+    .btn-call:hover {
+      background: #a50d24;
+      transform: translateY(-1px);
+      box-shadow: 0 8px 20px rgba(200, 16, 46, 0.3);
+    }
+
+    /* ===== HERO ===== */
+    .hero {
+      display: grid;
+      grid-template-columns: auto 1fr;
+      gap: 40px;
+      align-items: center;
+      margin-bottom: 80px;
+    }
+
+    .hero-logo {
+      width: 220px;
+      height: 220px;
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .hero-content {
+      min-width: 0;
+    }
+
+    .hero-label {
+      font-size: 0.7rem;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: rgba(255, 255, 255, 0.4);
+      font-weight: 600;
+      margin-bottom: 20px;
+    }
+
+    .hero h1 {
+      font-size: clamp(1.8rem, 4.5vw, 3.4rem);
+      font-weight: 800;
+      line-height: 1.05;
+      letter-spacing: -1.5px;
+      margin-bottom: 22px;
+    }
+
+    .hero h1 .red {
+      color: #c8102e;
+    }
+
+    .hero-description {
+      font-size: 1rem;
+      color: rgba(255, 255, 255, 0.65);
+      max-width: 560px;
+      line-height: 1.55;
+    }
+
+    /* ===== СОЦСЕТИ ===== */
+    .socials-title {
+      font-size: 0.7rem;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: rgba(255, 255, 255, 0.4);
+      font-weight: 600;
+      margin-bottom: 20px;
+    }
+
+    .social-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 16px;
+      margin-bottom: 80px;
+    }
+
+    .social-card {
+      display: flex;
+      align-items: center;
+      gap: 18px;
+      padding: 24px;
+      background: #111111;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 16px;
+      text-decoration: none;
+      color: #fff;
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .social-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 3px;
+      height: 100%;
+      background: #c8102e;
+      transform: scaleY(0);
+      transform-origin: bottom;
+      transition: transform 0.3s ease;
+    }
+
+    .social-card:hover {
+      background: #161616;
+      border-color: rgba(200, 16, 46, 0.4);
+      transform: translateY(-3px);
+    }
+
+    .social-card:hover::before {
+      transform: scaleY(1);
+    }
+
+    .social-icon {
+      width: 56px;
+      height: 56px;
+      border-radius: 12px;
+      background: #0a0a0a;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.7rem;
+      flex-shrink: 0;
+      transition: all 0.3s ease;
+    }
+
+    .social-card:hover .social-icon {
+      border-color: rgba(200, 16, 46, 0.5);
+      transform: scale(1.05);
+    }
+
+    .social-icon .fa-instagram {
+      background: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888);
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .social-icon .fa-vk {
+      color: #0077FF;
+    }
+
+    .social-icon .fa-globe {
+      color: #c8102e;
+    }
+
+    .social-icon .fa-map-location-dot {
+      color: #00b956;
+    }
+
+    .social-info {
+      flex: 1;
+      min-width: 0;
+    }
+
+    .social-name {
+      font-size: 1.05rem;
+      font-weight: 700;
+      margin-bottom: 4px;
+      letter-spacing: -0.3px;
+    }
+
+    .social-url {
+      font-size: 0.85rem;
+      color: rgba(255, 255, 255, 0.45);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .social-arrow {
+      color: rgba(255, 255, 255, 0.3);
+      font-size: 1rem;
+      transition: all 0.3s ease;
+      flex-shrink: 0;
+    }
+
+    .social-card:hover .social-arrow {
+      color: #c8102e;
+      transform: translateX(4px);
+    }
+
+    /* ===== НИЖНЯЯ ПОЛОСА ===== */
+    .info-footer {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 32px;
+      padding-top: 40px;
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+      margin-bottom: 40px;
+    }
+
+    .info-block .label {
+      font-size: 0.65rem;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      color: rgba(255, 255, 255, 0.35);
+      font-weight: 600;
+      margin-bottom: 10px;
+    }
+
+    .info-block .value {
+      font-size: 1.05rem;
+      font-weight: 600;
+      color: #fff;
+    }
+
+    /* ===== ПОДВАЛ ===== */
+    .copyright {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 14px;
+      font-size: 0.8rem;
+      color: rgba(255, 255, 255, 0.3);
+      padding: 20px 0;
+      letter-spacing: 0.5px;
+    }
+
+    .footer-logo {
+      width: 40px;
+      height: 40px;
+      flex-shrink: 0;
+      opacity: 0.7;
+    }
+
+    /* ===== АДАПТИВ ===== */
+    @media (max-width: 900px) {
+      .hero {
+        grid-template-columns: 1fr;
+        gap: 28px;
+      }
+
+      .hero-logo {
+        width: 160px;
+        height: 160px;
+      }
+    }
+
+    @media (max-width: 768px) {
+      body {
+        padding: 16px;
+      }
+
+      header {
+        flex-direction: column;
+        align-items: flex-start;
+        margin-bottom: 40px;
+      }
+
+      .header-right {
+        width: 100%;
+        justify-content: space-between;
+      }
+
+      .phone {
+        font-size: 0.9rem;
+      }
+
+      .btn-call {
+        padding: 12px 20px;
+        font-size: 0.85rem;
+      }
+
+      .hero {
+        margin-bottom: 50px;
+      }
+
+      .social-grid {
+        margin-bottom: 50px;
+      }
+
+      .info-footer {
+        gap: 24px;
+      }
+    }
+
+    @media (max-width: 420px) {
+      .brand-tagline {
+        display: none;
+      }
+
+      .btn-call span {
+        display: none;
+      }
+
+      .btn-call {
+        padding: 12px 14px;
+      }
+
+      .phone {
+        font-size: 0.85rem;
+      }
+
+      .footer-logo {
+        width: 32px;
+        height: 32px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+
+    <!-- ===== ШАПКА ===== -->
+    <header>
+      <div class="brand">
+        <!-- Логотип в шапке -->
+        <div class="brand-logo">
+          <img src="bez_fona.png" alt="RemetallAuto" class="logo-svg">
+        </div>
+        <div class="brand-text">
+          <div class="brand-name"><span class="red">Re</span>МеталлАвто</div>
+          <div class="brand-tagline">Восстановление и покраска</div>
+        </div>
+      </div>
+
+      <div class="header-right">
+        <a href="tel:+79033101953" class="phone">8 (903) 310-19-53</a>
+        <a href="tel:+79033101953" class="btn-call">
+          <i class="fas fa-phone"></i>
+          <span>Позвонить</span>
+        </a>
+      </div>
+    </header>
+
+    <!-- ===== HERO ===== -->
+    <section class="hero">
+      <!-- Большой логотип -->
+      <div class="hero-logo">
+        <img src="bez_fona.png" alt="RemetallAuto" class="logo-svg">
+      </div>
+
+      <div class="hero-content">
+        <div class="hero-label">Стерлитамак · Халтурина, 202</div>
+        <h1>
+          Новая жизнь <span class="red">металла.</span><br>
+          Новый вид авто.
+        </h1>
+        <p class="hero-description">
+          Восстановление элементов кузова и покраска. Работаем с коррозией,
+          восстанавливаем арки, пороги и днище — от участка металла до полного окрашивания.
+        </p>
+      </div>
+    </section>
+
+    <!-- ===== СОЦСЕТИ ===== -->
+    <div class="socials-title">Мы в соцсетях</div>
+    <div class="social-grid">
+
+      <!-- Instagram -->
+      <a href="https://instagram.com/remetall_auto" class="social-card" target="_blank" rel="noopener noreferrer">
+        <div class="social-icon">
+          <i class="fab fa-instagram"></i>
+        </div>
+        <div class="social-info">
+          <div class="social-name">Instagram</div>
+          <div class="social-url">@remetall_auto</div>
+        </div>
+        <div class="social-arrow"><i class="fas fa-arrow-right"></i></div>
+      </a>
+
+      <!-- ВКонтакте -->
+      <a href="https://vk.ru/remetallauto" class="social-card" target="_blank" rel="noopener noreferrer">
+        <div class="social-icon">
+          <i class="fab fa-vk"></i>
+        </div>
+        <div class="social-info">
+          <div class="social-name">ВКонтакте</div>
+          <div class="social-url">vk.ru/remetallauto</div>
+        </div>
+        <div class="social-arrow"><i class="fas fa-arrow-right"></i></div>
+      </a>
+
+      <!-- 2ГИС -->
+      <a href="https://2gis.ru/sterlitamak/firm/70000001116911104" class="social-card" target="_blank" rel="noopener noreferrer">
+        <div class="social-icon">
+          <i class="fas fa-map-location-dot"></i>
+        </div>
+        <div class="social-info">
+          <div class="social-name">2ГИС</div>
+          <div class="social-url">Стерлитамак · Халтурина, 202</div>
+        </div>
+        <div class="social-arrow"><i class="fas fa-arrow-right"></i></div>
+      </a>
+
+      <!-- Сайт -->
+      <a href="https://remetallauto.ru" class="social-card" target="_blank" rel="noopener noreferrer">
+        <div class="social-icon">
+          <i class="fas fa-globe"></i>
+        </div>
+        <div class="social-info">
+          <div class="social-name">Официальный сайт</div>
+          <div class="social-url">remetallauto.ru</div>
+        </div>
+        <div class="social-arrow"><i class="fas fa-arrow-right"></i></div>
+      </a>
+
+    </div>
+
+    <!-- ===== НИЖНЯЯ ПОЛОСА ===== -->
+    <div class="info-footer">
+      <div class="info-block">
+        <div class="label">Профиль работ</div>
+        <div class="value">Металл и покрытие в одной мастерской</div>
+      </div>
+      <div class="info-block">
+        <div class="label">Оценка</div>
+        <div class="value">Предварительно по фотографиям</div>
+      </div>
+      <div class="info-block">
+        <div class="label">График</div>
+        <div class="value">Пн–Сб · 10:00–21:00</div>
+      </div>
+    </div>
+
+    <!-- ===== ПОДВАЛ ===== -->
+    <div class="copyright">
+      <div class="footer-logo">
+        <img src="bez_fona.png" alt="RemetallAuto" class="logo-svg">
+      </div>
+      © RemetallAuto · Стерлитамак, Халтурина, 202
+    </div>
+
+  </div>
+</body>
+</html>
